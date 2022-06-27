@@ -1,0 +1,72 @@
+type Company {
+    id: ID!
+    name: String
+    number: Int
+    address: Address
+
+    createdAtISO: String!
+    updatedAtISO: String!
+    deletedAtISO: String!
+}
+
+input CreateCompanyInput {
+    name: String
+    number: Int
+    address: AddressInput
+}
+
+input UpdateCompanyInput {
+    id: ID!
+    name: String
+    number: Int
+    address: AddressInput
+}
+
+input DeleteCompanyInput {
+    id: ID!
+}
+
+type CreateCompanyPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    company: Company
+}
+
+type UpdateCompanyPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    company: Company
+}
+
+type SearchCompanyPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    company: [Company]
+}
+
+type DeleteCompanyPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    company: Company
+}
+
+type Query {
+  getCompanys: [Company!]!
+  getCompany(id: String): Company
+  searchCompany(input: String): SearchCompanyPayload
+}
+
+type Mutation {
+    createCompany(input: CreateCompanyInput): CreateCompanyPayload
+    updateCompany(input: UpdateCompanyInput): UpdateCompanyPayload
+    deleteCompany(input: DeleteCompanyInput): DeleteCompanyPayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

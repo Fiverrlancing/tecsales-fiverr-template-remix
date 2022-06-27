@@ -1,0 +1,68 @@
+type DiscountCode {
+    id: ID!
+    rule: DiscountRule
+    code: String!
+    createdAtISO: String!
+    updatedAtISO: String!
+    deletedAtISO: String!
+}
+
+input CreateDiscountCodeInput {
+    rule: CreateDiscountRuleInput
+    code: String!
+}
+
+input UpdateDiscountCodeInput {
+    id: ID!
+    rule: UpdateDiscountRuleInput
+    code: String!
+}
+
+input DeleteDiscountCodeInput {
+    id: ID!
+}
+
+type CreateDiscountCodePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    DiscountCode: DiscountCode
+}
+
+type UpdateDiscountCodePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountCode: DiscountCode
+}
+
+type SearchDiscountCodePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountCode: [DiscountCode]
+}
+
+type DeleteDiscountCodePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountCode: DiscountCode
+}
+
+type Query {
+  getDiscountCodes: [DiscountCode!]!
+  getDiscountCode(id: String): DiscountCode
+  searchDiscountCode(input: String): SearchDiscountCodePayload
+}
+
+type Mutation {
+    createDiscountCode(input: CreateDiscountCodeInput): CreateDiscountCodePayload
+    updateDiscountCode(input: UpdateDiscountCodeInput): UpdateDiscountCodePayload
+    deleteDiscountCode(input: DeleteDiscountCodeInput): DeleteDiscountCodePayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

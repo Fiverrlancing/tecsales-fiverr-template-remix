@@ -1,0 +1,94 @@
+enum MetaDataConfigParentType {
+    INVENTORY_ITEM,
+    INVENTORY_VARIANT,
+    INVENTORY_UNIT
+}
+
+enum MetaDataConfigType {
+    TEXT,
+    MULTI_LINE_TEXT,
+    DATE,
+    DATE_AND_TIME
+}
+
+type MetaDataConfig {
+    id: ID!,
+    name: String!
+    collection: String
+    key: String!
+    type: MetaDataConfigType!
+    parentType: MetaDataConfigParentType!
+    required: Boolean!
+    public: Boolean!
+    uiCollection: String
+    isMulti: Boolean! 
+    createdAtISO: String!
+    updatedAtISO: String!
+    deletedAtISO: String!
+}
+
+input CreateMetaDataConfigInput {
+    name: String!
+    collection: String
+    key: String!
+    type: MetaDataConfigType!
+    parentType: MetaDataConfigParentType!
+    required: Boolean!
+    public: Boolean!
+    uiCollection: String
+    isMulti: Boolean! 
+}
+
+input UpdateMetaDataConfigInput {
+  id: ID!
+    name: String!
+    collection: String
+    key: String!
+    type: MetaDataConfigType!
+    parentType: MetaDataConfigParentType!
+    required: Boolean!
+    public: Boolean!
+    uiCollection: String
+    isMulti: Boolean! 
+}
+
+input DeleteMetaDataConfigInput {
+  id: ID!
+}
+
+type CreateMetaDataConfigPayload {
+  message: String!
+  success: Boolean!
+  code: Int!
+  metaDataConfig: MetaDataConfig
+}
+
+type UpdateMetaDataConfigPayload {
+  message: String!
+  success: Boolean!
+  code: Int!
+  metaDataConfig: MetaDataConfig
+}
+
+type DeleteMetaDataConfigPayload {
+  message: String!
+  success: Boolean!
+  code: Int!
+  metaDataConfig: MetaDataConfig
+}
+
+type Query {
+  getMetaDataConfigs: [MetaDataConfig]
+  getMetaDataConfig(id: String): MetaDataConfig
+}
+
+type Mutation {
+  createMetaDataConfig(input: CreateMetaDataConfigInput): CreateMetaDataConfigPayload
+  updateMetaDataConfig(input: UpdateMetaDataConfigInput): UpdateMetaDataConfigPayload
+  deleteMetaDataConfig(input: DeleteMetaDataConfigInput): DeleteMetaDataConfigPayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

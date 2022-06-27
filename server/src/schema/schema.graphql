@@ -1,0 +1,242 @@
+input CreateInventoryTransferInput {
+  vendorReference: String!
+  customerReference: String!
+  originId: String!
+  destinationId: String!
+  expectedDeliveryDateISO: String!
+  trackingCarrierId: String!
+  trackingCode: String!
+  items: [CreateInventoryTransferItemInput]!
+  trackingUrl: String
+}
+
+input CreateInventoryBatchInput {
+  reference: String!
+  name: String!
+  description: String!
+  quantity: Int!
+  inventoryVariantId: String!
+  expirationISO: String!
+  inceptionISO: String!
+}
+
+input CreateInventoryTransferItemInput {
+  inventoryVariantId: String!
+  inventoryUnitId: String!
+  quantity: QuantityInput!
+}
+
+input UpdateInventoryTransferItemInput {
+  id: ID
+  inventoryVariantId: String!
+  inventoryUnitId: String!
+  quantity: QuantityInput!
+}
+
+input QuantityInput {
+  amount: Int
+  metric: Metric!
+}
+
+input UpdateInventoryTransferInput {
+  id: ID!
+  vendorReference: String!
+  customerReference: String!
+  originId: String!
+  destinationId: String!
+  expectedDeliveryDateISO: String!
+  trackingCarrierId: String!
+  trackingCode: String!
+  items: [UpdateInventoryTransferItemInput]!
+  trackingUrl: String
+}
+
+input DeleteInventoryTransferInput {
+  id: ID!
+}
+
+type InventoryTransfer {
+  id: ID!
+  vendorReference: String!
+  customerReference: String!
+  originId: String!
+  destinationId: String!
+  expectedDeliveryDateISO: String!
+  trackingCarrierId: String!
+  trackingCode: String!
+  trackingUrl: String!
+  items: [InventoryTransferItemDto]!
+  createdAtISO: String!
+  updatedAtISO: String!
+  deletedAtISO: String!
+}
+
+type InventoryTransferItemDto {
+  id: ID!
+  inventoryTransferId: String!
+  inventoryVariantId: String!
+  inventoryUnitId: String!
+  quantity: Quantity!
+  createdAtISO: String!
+  updatedAtISO: String!
+  deletedAtISO: String!
+}
+
+type InventoryBatch {
+  id: ID!
+  reference: String!
+  name: String!
+  description: String!
+  quantity: Int!
+  inventoryVariantId: String!
+  inceptionISO: String!
+  expirationISO: String!
+  createdAtISO: String!
+  updatedAtISO: String!
+  deletedAtISO: String!
+}
+
+input UpdateInventoryBatchInput {
+  id: ID!
+  reference: String!
+  name: String!
+  description: String!
+  quantity: Int!
+  inventoryVariantId: String!
+  expirationISO: String!
+  inceptionISO: String!
+}
+
+input DeleteInventoryBatchInput {
+  id: ID!
+}
+
+type Quantity {
+  amount: Int!
+  metric: Metric!
+}
+type CreateInventoryTransferPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryTransfer: InventoryTransfer
+}
+
+enum Metric {
+  UNIT
+  GRAM
+  KILOGRAM
+}
+
+type Address {
+  line1: String!
+  line2: String
+  line3: String
+  townCity: String!
+  country: String!
+  postZipCode: String!
+  provinceCode: String!
+  isDefault: Boolean!
+}
+
+input AddressInput {
+  line1: String!
+  line2: String
+  line3: String
+  townCity: String!
+  country: String!
+  postZipCode: String!
+  provinceCode: String!
+  isDefault: Boolean!
+}
+
+type PostageAddress {
+  recipientName: String!
+  line1: String!
+  line2: String
+  line3: String
+  townCity: String!
+  country: String!
+  postZipCode: String!
+  provinceCode: String!
+  isDefault: Boolean!
+}
+
+input PostageAddressInput {
+  recipientName: String!
+  line1: String!
+  line2: String
+  line3: String
+  townCity: String!
+  country: String!
+  postZipCode: String!
+  provinceCode: String!
+  isDefault: Boolean!
+}
+
+type UpdateInventoryTransferPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryTransfer: InventoryTransfer
+}
+
+type DeleteInventoryTransferPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryTransfer: InventoryTransfer
+}
+
+type CreateInventoryBatchPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryBatch: InventoryBatch
+}
+
+type UpdateInventoryBatchPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryBatch: InventoryBatch
+}
+
+type DeleteInventoryBatchPayload {
+  message: String
+  success: Boolean
+  code: Int
+  inventoryBatch: InventoryBatch
+}
+
+type Mutation {
+  createInventoryTransfer(
+    input: CreateInventoryTransferInput!
+  ): CreateInventoryTransferPayload!
+  updateInventoryTransfer(
+    input: UpdateInventoryTransferInput!
+  ): UpdateInventoryTransferPayload!
+  deleteInventoryTransfer(
+    input: DeleteInventoryTransferInput!
+  ): DeleteInventoryTransferPayload!
+  createInventoryBatch(
+    input: CreateInventoryBatchInput!
+  ): CreateInventoryBatchPayload!
+  updateInventoryBatch(
+    input: UpdateInventoryBatchInput!
+  ): UpdateInventoryBatchPayload!
+  deleteInventoryBatch(
+    input: DeleteInventoryBatchInput!
+  ): DeleteInventoryBatchPayload!
+
+}
+
+type Query {
+  getInventoryTransfer(id: String): InventoryTransfer
+  getInventoryBatch(id: String): InventoryBatch
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

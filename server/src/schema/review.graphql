@@ -1,0 +1,82 @@
+type Review {
+    id: ID!
+    text: String!
+    rating: Float!
+    accountId: String!    
+    showName: Boolean!
+    orderId: String!
+    productId: String!
+    salesChannelId: String!
+
+    createdAtISO: String!
+    updatedAtISO: String!
+    deletedAtISO: String!
+}
+
+input CreateReviewInput {
+    text: String!
+    rating: Float! 
+    showName: Boolean!
+    orderId: String!
+    productId: String!
+    salesChannelId: String!
+}
+
+input UpdateReviewInput {
+    id: ID!
+    text: String!
+    rating: Float! 
+    showName: Boolean!
+    orderId: String!
+    productId: String!
+    salesChannelId: String!
+}
+
+input DeleteReviewInput {
+    id: ID!
+}
+
+type CreateReviewPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    Review: Review
+}
+
+type UpdateReviewPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    review: Review
+}
+
+type SearchReviewPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    review: [Review]
+}
+
+type DeleteReviewPayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    review: Review
+}
+
+type Query {
+  getReviews: [Review!]!
+  getReview(id: String): Review
+  searchReview(input: String): SearchReviewPayload
+}
+
+type Mutation {
+    createReview(input: CreateReviewInput): CreateReviewPayload
+    updateReview(input: UpdateReviewInput): UpdateReviewPayload
+    deleteReview(input: DeleteReviewInput): DeleteReviewPayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

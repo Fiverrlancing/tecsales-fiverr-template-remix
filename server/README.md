@@ -1,0 +1,2 @@
+
+> ts-node generate-typings

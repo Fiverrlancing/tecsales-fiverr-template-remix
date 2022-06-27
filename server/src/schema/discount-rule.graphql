@@ -1,0 +1,173 @@
+
+enum CalculateOnType {
+    LINE_ITEMS,
+    ORDER,
+    SHIPPING
+}
+enum DiscountType {
+    PERCENTAGE,
+    FIXED,
+    BUY_X_GET_Y,
+    FREE
+}
+enum ProductSelection {
+    ALL,
+    SPECIFIC
+}
+enum CustomerSelection {
+    ALL,
+    SPECIFIC
+}
+enum MinimumAmountType {
+    PURCHASE_AMOUNT,
+    QUANTITY
+}
+enum BehaviorOnMaxReached {
+    CALCULATE_UPTO,
+    EXCLUDE_DISCOUNT
+}
+
+type DiscountRule {
+    id: ID!
+    name: String!
+    inceptsAtISO: String!
+    expiresAtISO: String
+    maxUsageCount: Int!
+    currentUsageCount: Int!
+    canUseWithOtherDiscounts: Boolean!
+    limitPerCustomer: Int!
+    limitPerOrder: Int!
+    calculateOn: CalculateOnType!
+    type: DiscountType!
+    discountValue: Float!
+    productSelection: ProductSelection
+    customerSelection: CustomerSelection
+    minimumAmountType: MinimumAmountType
+    minimumPurchaseAmount: Float
+    minimumQuantityAmount: Int
+    minimumSubTotalAmount: Float
+    maxQuantityAmount: Float
+    maxPurchaseAmount: Float
+    maxSubTotalAmount: Float
+    maxShippingRate: Float
+    behaviorOnMaxReached: BehaviorOnMaxReached
+    customerIds: [String]
+    productIds: [String]
+    countryCodes: [String]
+    bulkBuyProductIds: [String]
+    bulkBuyQuantity: Int
+
+    createdAtISO: String!
+    updatedAtISO: String!
+    deletedAtISO: String!
+}
+
+input CreateDiscountRuleInput {
+    name: String!
+    inceptsAtISO: String!
+    expiresAtISO: String
+    maxUsageCount: Int!
+    currentUsageCount: Int!
+    canUseWithOtherDiscounts: Boolean!
+    limitPerCustomer: Int!
+    limitPerOrder: Int!
+    calculateOn: CalculateOnType!
+    type: DiscountType!
+    discountValue: Float!
+    productSelection: ProductSelection
+    customerSelection: CustomerSelection
+    minimumAmountType: MinimumAmountType
+    minimumPurchaseAmount: Float
+    minimumQuantityAmount: Int
+    minimumSubTotalAmount: Float
+    maxQuantityAmount: Float
+    maxPurchaseAmount: Float
+    maxSubTotalAmount: Float
+    maxShippingRate: Float
+    behaviorOnMaxReached: BehaviorOnMaxReached
+    customerIds: [String]
+    productIds: [String]
+    countryCodes: [String]
+    bulkBuyProductIds: [String]
+    bulkBuyQuantity: Int
+}
+
+input UpdateDiscountRuleInput {
+    id: ID!
+    name: String!
+    inceptsAtISO: String!
+    expiresAtISO: String
+    maxUsageCount: Int!
+    currentUsageCount: Int!
+    canUseWithOtherDiscounts: Boolean!
+    limitPerCustomer: Int!
+    limitPerOrder: Int!
+    calculateOn: CalculateOnType!
+    type: DiscountType!
+    discountValue: Float!
+    productSelection: ProductSelection
+    customerSelection: CustomerSelection
+    minimumAmountType: MinimumAmountType
+    minimumPurchaseAmount: Float
+    minimumQuantityAmount: Int
+    minimumSubTotalAmount: Float
+    maxQuantityAmount: Float
+    maxPurchaseAmount: Float
+    maxSubTotalAmount: Float
+    maxShippingRate: Float
+    behaviorOnMaxReached: BehaviorOnMaxReached
+    customerIds: [String]
+    productIds: [String]
+    countryCodes: [String]
+    bulkBuyProductIds: [String]
+    bulkBuyQuantity: Int
+}
+
+input DeleteDiscountRuleInput {
+    id: ID!
+}
+
+type CreateDiscountRulePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    DiscountRule: DiscountRule
+}
+
+type UpdateDiscountRulePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountRule: DiscountRule
+}
+
+type SearchDiscountRulePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountRule: [DiscountRule]
+}
+
+type DeleteDiscountRulePayload {
+    message: String!
+    success: Boolean!
+    code: Int!
+    discountRule: DiscountRule
+}
+
+type Query {
+  getDiscountRules: [DiscountRule!]!
+  getDiscountRule(id: String): DiscountRule
+  searchDiscountRule(input: String): SearchDiscountRulePayload
+}
+
+type Mutation {
+    createDiscountRule(input: CreateDiscountRuleInput): CreateDiscountRulePayload
+    updateDiscountRule(input: UpdateDiscountRuleInput): UpdateDiscountRulePayload
+    deleteDiscountRule(input: DeleteDiscountRuleInput): DeleteDiscountRulePayload
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}
