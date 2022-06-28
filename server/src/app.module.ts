@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { InventoryTransferResolver } from './inventory-transfer/resolver';
 import { InventoryBatchResolver } from './inventory-batch/resolver';
+import { CompanyResolver } from './companies/resolver';
 
 @Module({
   imports: [
@@ -16,6 +17,10 @@ import { InventoryBatchResolver } from './inventory-batch/resolver';
     }),
   ],
   controllers: [],
-  providers: [InventoryTransferResolver, InventoryBatchResolver],
+  providers: [
+    InventoryTransferResolver,
+    InventoryBatchResolver,
+    CompanyResolver,
+  ],
 })
 export class AppModule {}
