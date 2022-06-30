@@ -1,8 +1,17 @@
 import { InventoryBatchDto } from 'src/inventory-batch/inventory-batch.dtos';
 import { InventoryTransferDto } from 'src/inventory-transfer/inventory-transfer.dtos';
 import { CompanyDto } from 'src/companies/companies.dtos';
+import { ReviewDto } from 'src/review/review.dtos';
+import { DiscountCodeDto } from 'src/discount-code/discount-code.dto';
+import { DiscountRuleDto } from 'src/discount-rule/discount-rule.dtos';
 
-type Entity = 'INVENTORY_TRANSFER' | 'INVENTORY_BATCH' | 'COMPANY';
+type Entity =
+  | 'INVENTORY_TRANSFER'
+  | 'INVENTORY_BATCH'
+  | 'COMPANY'
+  | 'REVIEW'
+  | 'DISCOUNT_CODE'
+  | 'DISCOUNT_RULE';
 
 type DatabaseStore = {
   [key in Entity]: {
@@ -26,9 +35,18 @@ const db: DatabaseStore = {
   INVENTORY_BATCH: {},
   INVENTORY_TRANSFER: {},
   COMPANY: {},
+  REVIEW: {},
+  DISCOUNT_CODE: {},
+  DISCOUNT_RULE: {},
 };
 
-type EntityObject = InventoryBatchDto | InventoryTransferDto | CompanyDto;
+type EntityObject =
+  | InventoryBatchDto
+  | InventoryTransferDto
+  | CompanyDto
+  | ReviewDto
+  | DiscountCodeDto
+  | DiscountRuleDto;
 
 export const findInDb = <T extends EntityObject>(entity: Entity, id: string) =>
   db[entity][id] as T;

@@ -5,6 +5,9 @@ import { join } from 'path';
 import { InventoryTransferResolver } from './inventory-transfer/resolver';
 import { InventoryBatchResolver } from './inventory-batch/resolver';
 import { CompanyResolver } from './companies/resolver';
+import { ReviewResolver } from './review/resolver';
+import { DiscountCodeResolver } from './discount-code/resolver';
+import { DiscountRuleResolver } from './discount-rule/resolver';
 
 @Module({
   imports: [
@@ -21,6 +24,9 @@ import { CompanyResolver } from './companies/resolver';
     InventoryTransferResolver,
     InventoryBatchResolver,
     CompanyResolver,
+    ReviewResolver,
+    DiscountCodeResolver,
+    DiscountRuleResolver,
   ],
 })
 export class AppModule {}
