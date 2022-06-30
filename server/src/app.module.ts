@@ -8,6 +8,7 @@ import { CompanyResolver } from './companies/resolver';
 import { ReviewResolver } from './review/resolver';
 import { DiscountCodeResolver } from './discount-code/resolver';
 import { DiscountRuleResolver } from './discount-rule/resolver';
+import { MetaDataConfigResolver } from './metadata-config/resolver';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { DiscountRuleResolver } from './discount-rule/resolver';
     ReviewResolver,
     DiscountCodeResolver,
     DiscountRuleResolver,
+    MetaDataConfigResolver,
   ],
 })
 export class AppModule {}

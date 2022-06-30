@@ -4,6 +4,7 @@ import { CompanyDto } from 'src/companies/companies.dtos';
 import { ReviewDto } from 'src/review/review.dtos';
 import { DiscountCodeDto } from 'src/discount-code/discount-code.dto';
 import { DiscountRuleDto } from 'src/discount-rule/discount-rule.dtos';
+import { MetaDataConfig } from 'src/metadata-config/metadata-config.dtos';
 
 type Entity =
   | 'INVENTORY_TRANSFER'
@@ -11,7 +12,8 @@ type Entity =
   | 'COMPANY'
   | 'REVIEW'
   | 'DISCOUNT_CODE'
-  | 'DISCOUNT_RULE';
+  | 'DISCOUNT_RULE'
+  | 'META_DATA_CONFIG';
 
 type DatabaseStore = {
   [key in Entity]: {
@@ -38,6 +40,7 @@ const db: DatabaseStore = {
   REVIEW: {},
   DISCOUNT_CODE: {},
   DISCOUNT_RULE: {},
+  META_DATA_CONFIG: {},
 };
 
 type EntityObject =
@@ -46,7 +49,8 @@ type EntityObject =
   | CompanyDto
   | ReviewDto
   | DiscountCodeDto
-  | DiscountRuleDto;
+  | DiscountRuleDto
+  | MetaDataConfig;
 
 export const findInDb = <T extends EntityObject>(entity: Entity, id: string) =>
   db[entity][id] as T;

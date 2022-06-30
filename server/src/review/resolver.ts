@@ -25,21 +25,7 @@ import { deleteFromDb, findInDb, storeToDb, updateInDb } from 'src/db/mock-db';
 export class ReviewResolver {
   @Query()
   async getReview(@Args('id') id: string) {
-    console.log(
-      '🚀 ~ file: resolver.ts ~ line 28 ~ ReviewResolver ~ getReview ~ id',
-      id,
-    );
     const review = findInDb<ReviewDto>('REVIEW', id);
-    console.log(
-      '🚀 ~ file: resolver.ts ~ line 33 ~ ReviewResolver ~ getReview ~ review',
-      review,
-    );
-    console.log(
-      '🚀 ~ file: resolver.ts ~ line 33 ~ ReviewResolver ~ getReview ~ fromGQLReview(review)',
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      fromGQLReview(review),
-    );
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
