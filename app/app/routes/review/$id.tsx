@@ -41,7 +41,6 @@ export default function () {
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 51 ~ onDelete.then ~ data", data)
       setMessage(data.deleteReview.message);
     })
     .catch((error) => {
@@ -50,25 +49,13 @@ export default function () {
   };
 
   const onUpdate = () => {
-    // TODO: delete
-    const values = {
-      id: '1',
-      text: 'updated blablabla',
-      rating: 2, // (out of 5)
-      accountId: '11',
-      showName: true,
-      orderId: '1',
-      productId: '1',
-      salesChannelId: '1',
-    }
     setMessage("")
     updateReview({
       variables: {
-        ...values,
+        ...values, rating: +values.rating
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 66 ~ onUpdate.then ~ data", data)
       setMessage(data.updateReview.message);
     })
     .catch((error) => {
@@ -78,7 +65,6 @@ export default function () {
 
   useEffect(() => {
     if (data) {
-      console.log("🚀 ~ file: $id.tsx ~ line 72 ~ useEffect ~ data", data)
       setValues({
         ...data.getReview,        
       });

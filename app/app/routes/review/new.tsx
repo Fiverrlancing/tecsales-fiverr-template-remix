@@ -28,22 +28,11 @@ export default function () {
   const [loading, setLoading] = useState(false);    
 
   const create = () => { 
-    // TODO: delete
-    const values = {
-      id: '',
-      text: 'blablabla',
-      rating: 5, // (out of 5)
-      accountId: '23',
-      showName: false,
-      orderId: '23',
-      productId: '12',
-      salesChannelId: '11',
-    }   
     setLoading(true);
     createReview({
       variables: {
-        ...values,        
-      },        
+        ...values, rating: +values.rating
+      },                
     })
       .then(() => {
         setLoading(false);
