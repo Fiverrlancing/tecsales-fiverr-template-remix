@@ -15,6 +15,7 @@ import {
   Checkbox,
   Select,
 } from "@chakra-ui/react";
+import { Link } from "@remix-run/react";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
 
 export type CalculateOnType = 'LINE_ITEMS' | 'ORDER' | 'SHIPPING';
@@ -23,32 +24,32 @@ export type ProductSelection = 'ALL' | 'SPECIFIC';
 export type CustomerSelection = 'ALL' | 'SPECIFIC';
 export type MinimumAmountType = 'PURCHASE_AMOUNT' | 'QUANTITY';
 
-const MINIMUM_AMOUNT_TYPE = [
+export const MINIMUM_AMOUNT_TYPE = [
   {value: 'PURCHASE_AMOUNT', label: 'PURCHASE_AMOUNT'},
   {value: 'QUANTITY', label: 'QUANTITY'},
 ]
-const CUSTOMER_SELECTION = [
+export const CUSTOMER_SELECTION = [
   {value: 'ALL', label: 'ALL'},
   {value: 'SPECIFIC', label: 'SPECIFIC'},
 ]
-const PRODUCT_SELECTION = [
+export const PRODUCT_SELECTION = [
   {value: 'ALL', label: 'ALL'},
   {value: 'SPECIFIC', label: 'SPECIFIC'},
 ]
-const CALCULATE_ON_TYPE = [
+export const CALCULATE_ON_TYPE = [
   {value: 'LINE_ITEMS', label: 'LINE_ITEMS'},
   {value: 'ORDER', label: 'ORDER'},
   {value: 'SHIPPING', label: 'SHIPPING'},
 ]
-const DISCOUNT_TYPE = [
+export const DISCOUNT_TYPE = [
   {value: 'PERCENTAGE', label: 'PERCENTAGE'},
   {value: 'FIXED', label: 'FIXED'},
   {value: 'BUY_X_GET_Y', label: 'BUY_X_GET_Y'},
   {value: 'FREE', label: 'FREE'},
 ]
 
-const BULK_BUY_PRODUCTS = [{ label: 'Product 1', value: '1' }, { label: 'Product 2', value: '2' }]
-const COUNTRY_CODES = [{ label: 'United Kingdom', value: 'UK' }, { label: 'Germany', value: 'DE' }]
+export const BULK_BUY_PRODUCTS = [{ label: 'Product 1', value: '1' }, { label: 'Product 2', value: '2' }]
+export const COUNTRY_CODES = [{ label: 'United Kingdom', value: 'UK' }, { label: 'Germany', value: 'DE' }]
 
 export interface DiscountRuleType {
   id: string;
@@ -119,6 +120,7 @@ export default function ({
       <Heading w={"fit-content"} margin={"2rem auto"}>
         Discount Rule
       </Heading>
+      <Link style={{color: 'lightblue'}} to='/discountcode/new'>¿Create instead a Discount Code?</Link>
        {error && (
         <Alert status="error">
           <AlertIcon />

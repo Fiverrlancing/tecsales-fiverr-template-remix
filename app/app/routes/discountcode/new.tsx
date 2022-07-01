@@ -12,8 +12,8 @@ const initialValues: DiscountCodeType = {
   rule: {
     id: '',
   name: '',
-  inceptsAtISO: '',
-  expiresAtISO: '',
+  inceptsAtISO: new Date().toISOString(),
+  expiresAtISO: new Date().toISOString(),
 
   maxUsageCount: 0, // 0 = unlimited
   currentUsageCount: 0,
