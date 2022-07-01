@@ -11,8 +11,8 @@ import { getUpdateDiscountRuleMutation } from "../../mutations/discountRule/upda
 const initialValues: DiscountRuleType = {
   id: '',
   name: '',
-  inceptsAtISO: '',
-  expiresAtISO: '',
+  inceptsAtISO: new Date().toISOString(),
+  expiresAtISO: new Date().toISOString(),
 
   maxUsageCount: 0, // 0 = unlimited
   currentUsageCount: 0,
@@ -71,7 +71,6 @@ export default function () {
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 51 ~ onDelete.then ~ data", data)
       setMessage(data.deleteDiscountRule.message);
     })
     .catch((error) => {
@@ -80,47 +79,6 @@ export default function () {
   };
 
   const onUpdate = () => {
-    // TODO: delete
-    const values = {
-     id: '1',
-      name: 'sebas',
-      inceptsAtISO: '222',
-      expiresAtISO: '2222',
-
-      maxUsageCount: 222, // 0 = unlimited
-      currentUsageCount: 2222,
-      canUseWithOtherDiscounts: true,
-      limitPerCustomer: 2222,
-      limitPerOrder: 22222,
-
-      type: 'PERCENTAGE',
-      calculateOn: 'LINE_ITEMS',
-      discountValue: 2222,
-      productSelection: 'ALL',
-      customerSelection: 'ALL',
-
-      minimumAmountType: 'PURCHASE_AMOUNT',
-      minimumPurchaseAmount: 222222,
-      minimumQuantityAmount: 222222,
-      minimumSubTotalAmount: 222222,
-
-      maxQuantityAmount: 222222,
-      maxPurchaseAmount: 222222,
-      maxSubTotalAmount: 222222,
-      maxShippingRate: 222222,
-
-      behaviorOnMaxReached: 'CALCULATE_UPTO',
-
-      customerIds: ['2', '2'],
-      productIds: ['2', '2'],
-      countryCodes: ['2', '2'],
-      bulkBuyProductIds: ['2', '2'],
-      bulkBuyQuantity: 222222,
-
-      createdAtISO: '2222',
-      updatedAtISO: '22222',
-      deletedAtISO: '22222',
-    }
     setMessage("")
     updateDiscountRule({
       variables: {
@@ -128,7 +86,6 @@ export default function () {
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 66 ~ onUpdate.then ~ data", data)
       setMessage(data.updateDiscountRule.message);
     })
     .catch((error) => {
@@ -138,7 +95,6 @@ export default function () {
 
   useEffect(() => {
     if (data) {
-      console.log("🚀 ~ file: $id.tsx ~ line 72 ~ useEffect ~ data", data)
       setValues({
         ...data.getDiscountRules,       
       });

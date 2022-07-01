@@ -9,8 +9,8 @@ import { useNavigate } from "@remix-run/react";
 const initialValues: DiscountRuleType = {
   id: '',
   name: '',
-  inceptsAtISO: '',
-  expiresAtISO: '',
+  inceptsAtISO: new Date().toISOString(),
+  expiresAtISO: new Date().toISOString(),
 
   maxUsageCount: 0, // 0 = unlimited
   currentUsageCount: 0,
@@ -39,7 +39,7 @@ const initialValues: DiscountRuleType = {
   customerIds: [],
   productIds: [],
   countryCodes: [],
-  bulkBuyProductIds: [],
+  bulkBuyProductIds: ['1', '2'],
   bulkBuyQuantity: 0,
 
   createdAtISO: '',
@@ -58,43 +58,6 @@ export default function () {
   const [loading, setLoading] = useState(false);    
 
   const create = () => { 
-    // TODO: delete
-    const values = {
-      name: '111',
-      inceptsAtISO: '1111',
-      expiresAtISO: '111',
-
-      maxUsageCount: 111111, // 111111 = unlimited
-      currentUsageCount: 111111,
-      canUseWithOtherDiscounts: false,
-      limitPerCustomer: 111111,
-      limitPerOrder: 111111,
-
-      type: 'PERCENTAGE',
-      calculateOn: 'LINE_ITEMS',
-      discountValue: 111111,
-      productSelection: 'ALL',
-      customerSelection: 'ALL',
-
-      minimumAmountType: 'PURCHASE_AMOUNT',
-      minimumPurchaseAmount: 111111,
-      minimumQuantityAmount: 111111,
-      minimumSubTotalAmount: 111111,
-
-      maxQuantityAmount: 111111,
-      maxPurchaseAmount: 111111,
-      maxSubTotalAmount: 111111,
-      maxShippingRate: 111111,
-
-      behaviorOnMaxReached: 'CALCULATE_UPTO',
-
-      customerIds: ['111111'],
-      productIds: ['1111'],
-      countryCodes: ['1111'],
-      bulkBuyProductIds: ['1111'],
-      bulkBuyQuantity: 111111,
-
-    }   
     setLoading(true);
     createDiscountRule({
       variables: {
