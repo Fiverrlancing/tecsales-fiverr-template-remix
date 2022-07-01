@@ -7,12 +7,8 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  NumberInput,
-  NumberInputField,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInputStepper,
   Checkbox,
+  Select,
 } from "@chakra-ui/react";
 
 export enum MetaDataConfigTypeType {
@@ -27,6 +23,18 @@ export enum MetaDataConfigParentType {
     INVENTORY_VARIANT = "INVENTORY_VARIANT",
     INVENTORY_UNIT = "INVENTORY_UNIT"
 }
+
+const TYPES = [
+  {value: MetaDataConfigTypeType.TEXT, label: 'text'},
+  {value: MetaDataConfigTypeType.MULTI_LINE_TEXT, label: 'multiline text'},
+  {value: MetaDataConfigTypeType.DATE, label: 'date'},
+  {value: MetaDataConfigTypeType.DATE_AND_TIME, label: 'date and time'},
+]
+const PARENT_TYPES = [
+  {value: MetaDataConfigParentType.INVENTORY_ITEM, label: 'inventory item'},
+  {value: MetaDataConfigParentType.INVENTORY_VARIANT, label: 'inventory variant'},
+  {value: MetaDataConfigParentType.INVENTORY_UNIT, label: 'inventory unit'},
+]
 
 export interface MetaDataConfigType {
   id: string;
@@ -84,6 +92,105 @@ export default function ({
           <AlertDescription>{message}</AlertDescription>
         </Alert>
       )}
+      
+       {/* ID */}      
+        <Input
+          value={values.id}
+          name="id"
+          type="hidden"
+        />
+      
+      <FormControl>
+        <FormLabel>Name</FormLabel>
+        <Input
+          value={values.name}
+          name="name"
+          onChange={handleInputChange}
+        />
+      </FormControl>
+      
+      <FormControl>
+        <FormLabel>Collection</FormLabel>
+        <Input
+          value={values.collection}
+          name="collection"
+          onChange={handleInputChange}
+        />
+      </FormControl>
+      
+      <FormControl>
+        <FormLabel>Key</FormLabel>
+        <Input
+          value={values.key}
+          name="key"
+          onChange={handleInputChange}
+        />
+      </FormControl>           
+      
+      <FormControl>
+        <FormLabel>Type</FormLabel>
+        <Select
+          name="type"
+          value={values.type}
+          onChange={handleInputChange}
+        >
+         {TYPES.map(({value, label}) => (
+          <option key={value} value={value}>{label}</option>
+         ))}
+        </Select>
+        </FormControl>
+      
+       <FormControl>
+            <FormLabel>Parent type</FormLabel>
+            <Select
+              name="parentType"
+              value={values.parentType}
+              onChange={handleInputChange}
+            >
+             {PARENT_TYPES.map(({value, label}) => (
+              <option key={value} value={value}>{label}</option>
+             ))}              
+            </Select>
+        </FormControl>
+      
+        <Checkbox
+          name="required"
+          checked={values.required}
+          onChange={(e) =>
+            setValues({...values, required: e.target.checked})
+          }
+        >
+          Required
+        </Checkbox>
+                
+        <Checkbox
+          name="public"
+          checked={values.public}
+          onChange={(e) =>
+            setValues({...values, public: e.target.checked})
+          }
+        >
+          Public
+        </Checkbox>
+        
+      <FormControl>
+        <FormLabel>UI collection</FormLabel>
+        <Input
+          value={values.uiCollection}
+          name="uiCollection"
+          onChange={handleInputChange}
+        />
+      </FormControl>
+
+        <Checkbox
+          name="isMulti"
+          checked={values.isMulti}
+          onChange={(e) =>
+            setValues({...values, isMulti: e.target.checked})
+          }
+        >
+          Multi
+        </Checkbox>
     </Stack>
   );
 }

@@ -47,7 +47,6 @@ export default function () {
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 51 ~ onDelete.then ~ data", data)
       setMessage(data.deleteMetaDataConfig.message);
     })
     .catch((error) => {
@@ -56,22 +55,6 @@ export default function () {
   };
 
   const onUpdate = () => {
-    // TODO: delete
-    const values = {
-      id: '1',
-      name: 'updated test',
-      collection: 'updated 12',
-      key: 'updated 12',
-      type: MetaDataConfigTypeType.DATE,
-      parentType: MetaDataConfigParentType.INVENTORY_UNIT,
-      required: true,
-      public: true,
-      uiCollection: 'updated 12',
-      isMulti: true,
-      createdAtISO: '',
-      updatedAtISO: '',
-      deletedAtISO: '',
-    }
     setMessage("")
     updateMetaDataConfig({
       variables: {
@@ -79,7 +62,6 @@ export default function () {
       },
     })
     .then(({data}) => {
-      console.log("🚀 ~ file: $id.tsx ~ line 66 ~ onUpdate.then ~ data", data)
       setMessage(data.updateMetaDataConfig.message);
     })
     .catch((error) => {
@@ -89,7 +71,6 @@ export default function () {
 
   useEffect(() => {
     if (data) {
-      console.log("🚀 ~ file: $id.tsx ~ line 72 ~ useEffect ~ data", data)
       setValues({
         ...data.getMetaDataConfig,        
       });

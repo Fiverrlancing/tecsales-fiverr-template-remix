@@ -35,7 +35,7 @@ export default function () {
 
   const create = () => { 
     // TODO: delete
-    const values = {
+    const testing = {
       id: '',
       name: 'test',
       collection: '12',

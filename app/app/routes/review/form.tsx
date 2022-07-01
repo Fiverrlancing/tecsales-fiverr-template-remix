@@ -7,11 +7,6 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  NumberInput,
-  NumberInputField,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInputStepper,
   Checkbox,
   Select,
 } from "@chakra-ui/react";
